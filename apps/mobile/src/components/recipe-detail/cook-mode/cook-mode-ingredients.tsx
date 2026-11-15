@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
+import { sharedConfigHooks } from "@/hooks/config/shared-config-hooks";
 import { useAmountDisplayPreference } from "@/hooks/use-amount-display-preference";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -11,6 +12,7 @@ import { FormattedNumber, useIntl } from "react-intl";
 import { withUniwind } from "uniwind";
 
 import type { RecipeIngredientsDto } from "@norish/shared/contracts";
+import { createUnitFormatter } from "@norish/shared-react/hooks";
 import { formatAmount } from "@norish/shared/lib/format-amount";
 
 const StyledEntypo = withUniwind(Entypo);
@@ -50,6 +52,8 @@ export function CookModeIngredients({
   onSwipeRight,
 }: CookModeIngredientsProps) {
   const intl = useIntl();
+  const { units } = sharedConfigHooks.useUnitsQuery();
+  const { formatUnitOnly } = createUnitFormatter({ locale: intl.locale, units });
   const [foregroundColor, mutedColor, accentColor] = useThemeColor([
     "foreground",
     "muted",
@@ -195,15 +199,29 @@ export function CookModeIngredients({
                   className="size-1.5 shrink-0 rounded-full"
                   style={{ backgroundColor: accentColor }}
                 />
+                {(scaledAmount || item.unit) && (
+                  <Text
+                    className="shrink-0 text-[15px] font-bold"
+                    style={{ color: foregroundColor }}
+                  >
+                    {scaledAmount}
+                    {item.unit ? (
+                      <Text style={{ color: accentColor }}>
+                        {scaledAmount ? " " : ""}
+                        {formatUnitOnly(
+                          item.unit,
+                          item.amount != null ? Number(item.amount) * scale : null
+                        )}
+                      </Text>
+                    ) : null}
+                  </Text>
+                )}
                 <Text
                   className="flex-1 text-[17px]"
                   style={{ color: foregroundColor }}
                   numberOfLines={2}
                 >
                   {cleanName}
-                </Text>
-                <Text className="shrink-0 text-[15px] font-medium" style={{ color: mutedColor }}>
-                  {[scaledAmount, item.unit].filter(Boolean).join(" ")}
                 </Text>
               </View>
               {index < ingredients.length - 1 &&

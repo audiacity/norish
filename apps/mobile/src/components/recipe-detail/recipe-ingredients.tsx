@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { sharedConfigHooks } from "@/hooks/config/shared-config-hooks";
 import { useAmountDisplayPreference } from "@/hooks/use-amount-display-preference";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Button, Separator, useThemeColor } from "heroui-native";
@@ -7,6 +8,7 @@ import { FormattedNumber, useIntl } from "react-intl";
 import { withUniwind } from "uniwind";
 
 import type { RecipeIngredientsDto } from "@norish/shared/contracts";
+import { createUnitFormatter } from "@norish/shared-react/hooks";
 import { formatAmount } from "@norish/shared/lib/format-amount";
 
 import { SmartText } from "./text-renderer";
@@ -82,10 +84,12 @@ export function RecipeIngredients({
   servings: controlledServings,
   onServingsChange: controlledOnServingsChange,
 }: RecipeIngredientsProps) {
-  const [foregroundColor, mutedColor] = useThemeColor(["foreground", "muted"] as const);
+  const [foregroundColor, accentColor] = useThemeColor(["foreground", "accent"] as const);
   const [internalServings, setInternalServings] = useState(baseServings);
   const { mode, toggleMode } = useAmountDisplayPreference();
   const intl = useIntl();
+  const { units } = sharedConfigHooks.useUnitsQuery();
+  const { formatUnitOnly } = createUnitFormatter({ locale: intl.locale, units });
 
   // Support both controlled and uncontrolled modes
   const servings = controlledServings ?? internalServings;
@@ -141,12 +145,23 @@ export function RecipeIngredients({
         return (
           <React.Fragment key={`${item.id ?? displayName}-${index}`}>
             <View style={styles.row}>
+              {(scaledAmount || item.unit) && (
+                <Text style={[styles.amount, { color: foregroundColor }]}>
+                  {scaledAmount}
+                  {item.unit ? (
+                    <Text style={{ color: accentColor }}>
+                      {scaledAmount ? " " : ""}
+                      {formatUnitOnly(
+                        item.unit,
+                        item.amount != null ? Number(item.amount) * scale : null
+                      )}
+                    </Text>
+                  ) : null}
+                </Text>
+              )}
               <SmartText style={[styles.name, { color: foregroundColor }]} highlightTimers>
                 {displayName}
               </SmartText>
-              <Text style={[styles.amount, { color: mutedColor }]}>
-                {[scaledAmount, item.unit].filter(Boolean).join(" ")}
-              </Text>
             </View>
             {index < ingredients.length - 1 &&
               !(ingredients[index + 1]?.ingredientName ?? "").trim().startsWith("#") && (
@@ -201,8 +216,8 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "baseline",
+    gap: 6,
     paddingVertical: 12,
   },
   name: {
@@ -210,6 +225,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   amount: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: "700",
   },
 });

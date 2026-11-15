@@ -12,7 +12,9 @@ import type {
 } from "@norish/shared/contracts";
 
 import type { RecipeEnrichmentResult } from "../recipes/recipe";
+import type { SystemScopedIngredientDto } from "../recipes/recipe/use-recipe-ingredients";
 import { shouldPreserveOptimisticUpdate } from "../optimistic-updates";
+import { selectIngredientsForSystem } from "../recipes/recipe/use-recipe-ingredients";
 
 // --- Types ---
 
@@ -242,8 +244,13 @@ export function createRecipeDetailContext(adapters: RecipeDetailAdapters) {
     }
 
     const convertingTo = conversion?.target ?? null;
+    // recipeIngredients holds one copy of the lines per unit system.
     const adjustedIngredients = scaleIngredients(
-      recipe?.recipeIngredients ?? [],
+      selectIngredientsForSystem(
+        (recipe?.recipeIngredients ?? []) as SystemScopedIngredientDto[],
+        recipe?.systemUsed,
+        recipe?.systemUsed
+      ),
       recipe?.servings,
       _servings
     );

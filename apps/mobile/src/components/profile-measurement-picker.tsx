@@ -66,7 +66,7 @@ export function ProfileMeasurementPicker() {
       </Text>
       <Select
         presentation="bottom-sheet"
-        isDisabled={mutation.isPending}
+        isDisabled={mutation.isPending || !data}
         value={{ value: current, label: label(current) }}
         onValueChange={(option) => {
           const picked = choices.find(

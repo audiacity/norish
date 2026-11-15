@@ -27,7 +27,7 @@ function isIOS26OrLater(): boolean {
 type ActiveTab = "dashboard" | "groceries" | "search" | "calendar" | "profile";
 
 function useActiveTab(): { tab: ActiveTab; isRecipeDetail: boolean } {
-  const segments = useSegments();
+  const segments: string[] = useSegments();
   // segments[0] = '(tabs)', segments[1] = tab name
   const tab = (segments[1] as ActiveTab | undefined) ?? "dashboard";
   // segments[2] = 'recipe' when on /(tabs)/dashboard/recipe/[id]

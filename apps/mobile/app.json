@@ -5,11 +5,11 @@
     "version": "0.0.1-beta",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobile",
+    "scheme": "norish",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.anonymous.norish-m"
+      "bundleIdentifier": "eu.audiacity.norish"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,6 +26,8 @@
     },
     "plugins": [
       "expo-router",
+      "./plugins/no-push-entitlement",
+      "./plugins/pod-deployment-target",
       [
         "expo-splash-screen",
         {
@@ -52,23 +54,6 @@
           "supportsPictureInPicture": true
         }
       ],
-      [
-        "expo-widgets",
-        {
-          "widgets": [
-            {
-              "name": "TimerActivity",
-              "displayName": "Cooking Timer",
-              "description": "Shows your active cooking timer on the Lock Screen and Dynamic Island",
-              "supportedFamilies": [
-                "systemSmall",
-                "systemMedium"
-              ]
-            }
-          ]
-        }
-      ],
-      "expo-notifications",
       "expo-font",
       "expo-image",
       "expo-status-bar",

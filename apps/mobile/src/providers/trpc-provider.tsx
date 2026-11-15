@@ -117,10 +117,8 @@ const trpcBundle = createTRPCProviderBundle<AppRouter>({
   enableLoggerLink: false,
   getQueryClient: () => persistedQueryClient,
   onWebSocketClientCreate: (client) => {
+    mobileWebSocketClients.clear();
     mobileWebSocketClients.add(client);
-  },
-  onWebSocketClientDestroy: (client) => {
-    mobileWebSocketClients.delete(client);
   },
   onWebSocketClose: notifyBackendDisconnect,
   onWebSocketOpen: notifyBackendConnect,
@@ -133,7 +131,6 @@ const trpcBundle = createTRPCProviderBundle<AppRouter>({
     void invalidateSession("transport-unauthorized");
   },
   mutationLink: createOutboxLink<AppRouter>(),
-  invalidateOnReconnect: false,
 });
 
 export const useTRPC = trpcBundle.useTRPC;

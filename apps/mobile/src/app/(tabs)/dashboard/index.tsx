@@ -2,7 +2,6 @@ import type { RecipeListRow } from "@/lib/recipes/build-recipe-list-rows";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, View } from "react-native";
 import { SectionHeader } from "@/components/home/section-header";
-import { TodaysMealsSection } from "@/components/home/todays-meals-section";
 import { RecipeEmptyStateCard } from "@/components/recipes/recipe-empty-state-card";
 import { RecipeListRowContent } from "@/components/recipes/recipe-list-row-content";
 import {
@@ -13,17 +12,14 @@ import { usePermissionsContext } from "@/context/permissions-context";
 import { useRecipesContext } from "@/context/recipes-context";
 import { useRecipePrefetch } from "@/hooks/recipes/use-recipe-prefetch";
 import { useViewableItemsRef, viewabilityConfig } from "@/hooks/recipes/use-viewability-config";
-import { TODAYS_MEALS_MOCK } from "@/lib/meals/planned-meal-mock-data";
 import { canShowDeleteAction } from "@/lib/permissions/mobile-action-visibility";
 import { buildRecipeListRows } from "@/lib/recipes/build-recipe-list-rows";
 import { createNextDeletingIds } from "@/lib/recipes/create-next-deleting-ids";
 import { createRefreshRequestHandler } from "@/lib/refresh/create-refresh-request-handler";
 import { styles } from "@/styles/index.styles";
-import { useRouter } from "expo-router";
 import { useIntl } from "react-intl";
 
 export default function RecipesScreen() {
-  const router = useRouter();
   const intl = useIntl();
   const {
     recipeCards,
@@ -34,7 +30,7 @@ export default function RecipesScreen() {
     loadMore,
     pendingRecipeIds,
     openRecipe,
-    deleteRecipe,
+    deleteRecipes,
     toggleFavorite,
     invalidate,
   } = useRecipesContext();
@@ -64,9 +60,11 @@ export default function RecipesScreen() {
   const handleDelete = useCallback(
     (id: string) => {
       setDeletingIds((prev) => createNextDeletingIds(prev, id));
-      deleteRecipe(id, recipeCardsRef.current.find((recipe) => recipe.id === id)?.version ?? 1);
+      deleteRecipes([
+        { id, version: recipeCardsRef.current.find((recipe) => recipe.id === id)?.version ?? 1 },
+      ]);
     },
-    [deleteRecipe]
+    [deleteRecipes]
   );
 
   const canDeleteOwnerRecipe = useCallback(
@@ -130,16 +128,10 @@ export default function RecipesScreen() {
   const renderHeader = useCallback(
     () => (
       <>
-        <SectionHeader
-          title={intl.formatMessage({ id: "calendar.mobile.today" })}
-          actionLabel={intl.formatMessage({ id: "calendar.page.title" })}
-          onAction={() => router.push("/(tabs)/calendar")}
-        />
-        <TodaysMealsSection meals={TODAYS_MEALS_MOCK} />
         <SectionHeader title={intl.formatMessage({ id: "recipes.dashboard.recipesTitle" })} />
       </>
     ),
-    [intl, router]
+    [intl]
   );
 
   const renderEmpty = useCallback(() => {

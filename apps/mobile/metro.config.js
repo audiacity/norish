@@ -2,7 +2,14 @@ const { getDefaultConfig } = require("expo/metro-config");
 const { withUniwindConfig } = require("uniwind/metro");
 const { wrapWithReanimatedMetroConfig } = require("react-native-reanimated/metro-config");
 
+const path = require("path");
 const config = getDefaultConfig(__dirname);
+const root = path.resolve(__dirname, "../..");
+config.watchFolders = [path.join(root, "packages"), path.join(root, "tooling"), path.join(root, "node_modules")];
+
+// Force singletons to resolve from apps/mobile (the linked workspace packages would otherwise pull their own copies).
+const SINGLETONS = /^(react(\/.*)?|react-native|@tanstack\/react-query|@tanstack\/query-core|@trpc\/(client|server|tanstack-react-query))$/;
+const origin = path.join(__dirname, "package.json");
 
 config.resolver.unstable_enablePackageExports = true;
 
@@ -16,6 +23,12 @@ config.resolver = {
   ...resolver,
   assetExts: (resolver.assetExts ?? []).filter((ext) => ext !== "svg"),
   sourceExts: [...(resolver.sourceExts ?? []), "svg"],
+  resolveRequest: (context, name, platform) =>
+    context.resolveRequest(
+      SINGLETONS.test(name) ? { ...context, originModulePath: origin } : context,
+      name,
+      platform,
+    ),
 };
 
 module.exports = withUniwindConfig(wrapWithReanimatedMetroConfig(config), {

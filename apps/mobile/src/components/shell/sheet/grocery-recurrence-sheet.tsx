@@ -83,6 +83,8 @@ export function GroceryRecurrenceSheet({
     week: intl.formatMessage({ id: "common.recurrence.week" }),
     weeks: intl.formatMessage({ id: "common.recurrence.weeks" }),
     month: intl.formatMessage({ id: "common.recurrence.month" }),
+    year: intl.formatMessage({ id: "common.recurrence.year" }),
+    years: intl.formatMessage({ id: "common.recurrence.years" }),
     months: intl.formatMessage({ id: "common.recurrence.months" }),
     today: intl.formatMessage({ id: "common.recurrence.today" }),
     tomorrow: intl.formatMessage({ id: "common.recurrence.tomorrow" }),

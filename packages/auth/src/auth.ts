@@ -1,6 +1,7 @@
 import type { BetterAuthOptions, Where } from "better-auth";
 import type { DBAdapter } from "better-auth/adapters";
 import { apiKey } from "@better-auth/api-key";
+import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { APIError, createAuthMiddleware, getSessionFromCtx } from "better-auth/api";
@@ -307,6 +308,7 @@ function createBetterAuth() {
     trustedOrigins: [
       SERVER_CONFIG.AUTH_URL,
       ...SERVER_CONFIG.TRUSTED_ORIGINS,
+      ...(SERVER_CONFIG.MOBILE_APP_ENABLED ? ["norish://"] : []),
       ...(process.env.NODE_ENV === "development"
         ? [
             /* eslint-disable sonarjs/no-clear-text-protocols -- development only: a phone on the LAN reaches the dev server over plain http */
@@ -513,6 +515,7 @@ function createBetterAuth() {
       },
     },
     plugins: [
+      ...(SERVER_CONFIG.MOBILE_APP_ENABLED ? [expo()] : []),
       genericOAuth({
         config: buildOIDCProviders(),
       }),

@@ -42,7 +42,7 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
     isCreatingShare,
   } = ctx;
 
-  const { deleteRecipe } = useRecipesContext();
+  const { deleteRecipes } = useRecipesContext();
   const {
     canEditRecipe,
     canDeleteRecipe,
@@ -107,7 +107,7 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
           text: intl.formatMessage({ id: "recipes.deleteModal.title" }),
           style: "destructive",
           onPress: () => {
-            deleteRecipe(recipe.id, recipe.version);
+            deleteRecipes([{ id: recipe.id, version: recipe.version }]);
             router.back();
           },
         },
@@ -117,7 +117,7 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
         },
       ]
     );
-  }, [intl, recipe, deleteRecipe, router]);
+  }, [intl, recipe, deleteRecipes, router]);
 
   // --- Convert ---
   // Check which measurement systems already exist in the recipe's ingredients

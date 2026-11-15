@@ -102,7 +102,7 @@ export async function clearBackendBaseUrl(): Promise<void> {
 }
 
 export function getBackendHealthUrl(baseUrl: string): string {
-  return `${baseUrl}/api/v1/health`;
+  return `${baseUrl}/api/auth/ok`;
 }
 
 export function getBackendTrpcUrl(baseUrl: string): string {

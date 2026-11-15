@@ -120,6 +120,21 @@ location /norish {
 }
 ```
 
+## Mobile app
+
+| Variable             | Description                                  | Default |
+| -------------------- | -------------------------------------------- | ------- |
+| `MOBILE_APP_ENABLED` | Allow native sign-in from the Norish iOS app | `false` |
+
+Set `MOBILE_APP_ENABLED=true` only if people on this server use the iOS app. It
+trusts the `norish://` origin and enables the `/expo-authorization-proxy`
+endpoint, which redirects the browser back into the app, so it is an open
+redirect surface that stays off otherwise.
+
+:::warning
+Do not add `norish://` to `TRUSTED_ORIGINS`. Use this flag instead.
+:::
+
 ## Auth rate limiting
 
 | Variable                  | Description                        | Default |

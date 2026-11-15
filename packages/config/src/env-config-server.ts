@@ -135,6 +135,11 @@ const ServerConfigFields = z.object({
     .enum(["true", "false"])
     .default("true")
     .transform((value) => value === "true"),
+  // Opt-in for the native (Expo) iOS app: exposes /expo-authorization-proxy and trusts norish://.
+  MOBILE_APP_ENABLED: z
+    .enum(["true", "false"])
+    .default("false")
+    .transform((value) => value === "true"),
   AUTH_RATE_LIMIT_WINDOW: z.coerce.number().int().positive().default(60),
   AUTH_RATE_LIMIT_MAX: z.coerce.number().int().positive().default(20),
 

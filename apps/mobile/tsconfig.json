@@ -3,10 +3,41 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@/assets/*": ["./assets/*"],
-      "@norish/trpc/*": ["../../packages/trpc/src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/assets/*": [
+        "./assets/*"
+      ],
+      "@norish/trpc/*": [
+        "../../packages/trpc/src/*"
+      ],
+      "react-native": [
+        "./node_modules/react-native"
+      ],
+      "@tanstack/react-query": [
+        "./node_modules/@tanstack/react-query"
+      ],
+      "@tanstack/query-core": [
+        "./node_modules/@tanstack/query-core"
+      ],
+      "@trpc/client": [
+        "./node_modules/@trpc/client"
+      ],
+      "@trpc/server": [
+        "./node_modules/@trpc/server"
+      ],
+      "@trpc/tanstack-react-query": [
+        "./node_modules/@trpc/tanstack-react-query"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", "declarations.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "declarations.d.ts",
+    "../../packages/trpc/src/global-modules.d.ts"
+  ]
 }

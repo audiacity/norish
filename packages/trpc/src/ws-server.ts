@@ -72,7 +72,10 @@ let stopConnectionInvalidation = globalForWs.stopConnectionInvalidation ?? null;
 
 function originOf(url: string): string | null {
   try {
-    return new URL(url).origin;
+    const { origin } = new URL(url);
+
+    // Opaque origins (norish://, file:) serialize to "null"; never a trust match.
+    return origin === "null" ? null : origin;
   } catch {
     return null;
   }

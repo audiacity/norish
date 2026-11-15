@@ -37,7 +37,7 @@ export default function SearchScreen() {
     error,
     pendingRecipeIds,
     openRecipe,
-    deleteRecipe,
+    deleteRecipes,
     toggleFavorite,
     invalidate,
   } = useRecipesContext();
@@ -81,9 +81,11 @@ export default function SearchScreen() {
   const handleDelete = useCallback(
     (id: string) => {
       setDeletingIds((prev) => createNextDeletingIds(prev, id));
-      deleteRecipe(id, recipeCardsRef.current.find((recipe) => recipe.id === id)?.version ?? 1);
+      deleteRecipes([
+        { id, version: recipeCardsRef.current.find((recipe) => recipe.id === id)?.version ?? 1 },
+      ]);
     },
-    [deleteRecipe]
+    [deleteRecipes]
   );
 
   const canDeleteOwnerRecipe = useCallback(

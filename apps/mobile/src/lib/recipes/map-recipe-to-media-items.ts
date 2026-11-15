@@ -1,5 +1,5 @@
 /**
- * Maps FullRecipeDTO media (image + images + videos) into the MediaItem[]
+ * Maps FullRecipeDTO media (images + videos) into the MediaItem[]
  * array consumed by RecipeMediaHeader.
  */
 
@@ -24,8 +24,7 @@ export type MediaItem = MediaItemImage | MediaItemVideo;
 /**
  * Build an ordered MediaItem[] from a FullRecipeDTO.
  *
- * Order: videos first (sorted by order), then gallery images (sorted by order),
- * then the primary recipe image as a fallback if no gallery images exist.
+ * Order: videos first, then gallery images, each sorted by order.
  */
 export function mapRecipeToMediaItems(
   recipe: FullRecipeDTO,
@@ -51,14 +50,6 @@ export function mapRecipeToMediaItems(
     items.push({
       type: "image",
       uri: resolveImageUri(img.image, backendBaseUrl),
-    });
-  }
-
-  // 3. Primary image as fallback (only if no gallery images)
-  if (items.filter((i) => i.type === "image").length === 0 && recipe.image) {
-    items.push({
-      type: "image",
-      uri: resolveImageUri(recipe.image, backendBaseUrl),
     });
   }
 

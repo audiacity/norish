@@ -38,6 +38,7 @@
     "keepsCurrent": "Pozostaw puste, aby zachować zapisaną wartość."
   },
   "status": {
+    "comingSoon": "Wkrótce dostępne",
     "loading": "Ładowanie...",
     "saving": "Zapisywanie...",
     "deleting": "Usuwanie...",

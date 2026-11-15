@@ -32,13 +32,11 @@ export const sharedHouseholdHooks = createHouseholdHooks({
               <View>
                 <Toast.Title className="text-foreground">
                   {intl.formatMessage({
-                    defaultMessage: "Removed from household",
                     id: "settings.household.removedTitle",
                   })}
                 </Toast.Title>
                 <Toast.Description className="text-muted">
                   {intl.formatMessage({
-                    defaultMessage: "You have been removed from the household by an admin.",
                     id: "settings.household.removedDescription",
                   })}
                 </Toast.Description>

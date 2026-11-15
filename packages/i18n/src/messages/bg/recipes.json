@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} от съставките са вкъщи"
   },
   "detail": {
+    "rating": "Оценка",
     "viewOriginal": "Виж оригиналната рецепта",
     "ingredients": "Съставки",
     "ingredientOptions": "Опции за съставките",

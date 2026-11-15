@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Verwijderd uit huishouden",
+    "removedDescription": "Je bent door een beheerder uit het huishouden verwijderd.",
     "info": {
       "yourRole": "Jouw rol",
       "admin": "Beheerder",

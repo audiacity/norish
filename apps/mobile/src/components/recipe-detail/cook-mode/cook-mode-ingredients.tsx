@@ -7,7 +7,7 @@ import { useAmountDisplayPreference } from "@/hooks/use-amount-display-preferenc
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Button, Separator, useThemeColor } from "heroui-native";
-import { useIntl } from "react-intl";
+import { FormattedNumber, useIntl } from "react-intl";
 import { withUniwind } from "uniwind";
 
 import type { RecipeIngredientsDto } from "@norish/shared/contracts";
@@ -19,11 +19,6 @@ const SWIPE_THRESHOLD = 60;
 const SPRING = { damping: 20, stiffness: 200, mass: 0.8 } as const;
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
-
-function formatServings(n: number): string {
-  if (Number.isInteger(n)) return String(n);
-  return n.toFixed(2).replace(/\.?0+$/, "");
-}
 
 function calcDecServings(servings: number): number {
   if (servings <= 1) return Math.max(0.125, servings / 2);
@@ -139,7 +134,7 @@ export function CookModeIngredients({
               className="min-w-[28px] text-center text-lg font-bold"
               style={{ color: foregroundColor }}
             >
-              {formatServings(servings)}
+              <FormattedNumber value={servings} maximumFractionDigits={2} />
             </Text>
             <Button
               variant="secondary"

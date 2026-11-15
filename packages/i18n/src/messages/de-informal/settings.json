@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Aus dem Haushalt entfernt",
+    "removedDescription": "Du wurdest von einem Admin aus dem Haushalt entfernt.",
     "info": {
       "yourRole": "Deine Rolle",
       "admin": "Administrator",

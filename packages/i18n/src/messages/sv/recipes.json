@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} av ingredienserna hemma"
   },
   "detail": {
+    "rating": "Betyg",
     "viewOriginal": "Visa originalrecept",
     "ingredients": "Ingredienser",
     "ingredientOptions": "Ingrediensalternativ",

@@ -23,7 +23,7 @@ export type SwipeableRecipeRowRef = {
 
 type Props = {
   children: React.ReactNode;
-  recipeName?: string;
+  recipeName: string;
   onDelete?: () => void;
   onAddToGroceries?: () => void;
   onAddToCalendar?: () => void;
@@ -61,7 +61,7 @@ function ActionButton({ icon, color, progress, index, total, onPress }: ActionBu
 }
 
 function SwipeableRecipeRowComponent(
-  { children, recipeName = "Recipe", onDelete, onAddToGroceries, onAddToCalendar }: Props,
+  { children, recipeName, onDelete, onAddToGroceries, onAddToCalendar }: Props,
   ref: React.ForwardedRef<SwipeableRecipeRowRef>
 ) {
   const intl = useIntl();
@@ -92,7 +92,12 @@ function SwipeableRecipeRowComponent(
     close();
     Alert.alert(
       intl.formatMessage({ id: "recipes.card.deleteRecipe" }),
-      intl.formatMessage({ id: "recipes.deleteModal.confirmMessage" }, { recipeName }),
+      intl.formatMessage(
+        { id: "recipes.deleteModal.confirmMessage" },
+        {
+          recipeName: recipeName,
+        }
+      ),
       [
         { text: intl.formatMessage({ id: "common.actions.cancel" }), style: "cancel" },
         {

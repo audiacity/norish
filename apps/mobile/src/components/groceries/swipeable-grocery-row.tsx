@@ -14,6 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Haptics from "expo-haptics";
+import { useIntl } from "react-intl";
 
 /** Width of the revealed action area (houses one circular button). */
 const ACTION_WIDTH = 72;
@@ -32,6 +33,7 @@ type SwipeableGroceryRowProps = {
 };
 
 export function SwipeableGroceryRow({ children, onDelete }: SwipeableGroceryRowProps) {
+  const intl = useIntl();
   const translateX = useSharedValue(0);
   const startX = useSharedValue(0);
   const isOpen = useSharedValue(false);
@@ -207,7 +209,7 @@ export function SwipeableGroceryRow({ children, onDelete }: SwipeableGroceryRowP
           style={styles.actionPressable}
           hitSlop={4}
           accessibilityRole="button"
-          accessibilityLabel="Delete"
+          accessibilityLabel={intl.formatMessage({ id: "common.actions.delete" })}
         />
       </Animated.View>
 

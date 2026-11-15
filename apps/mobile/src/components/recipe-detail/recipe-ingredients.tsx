@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useAmountDisplayPreference } from "@/hooks/use-amount-display-preference";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Button, Separator, useThemeColor } from "heroui-native";
-import { useIntl } from "react-intl";
+import { FormattedNumber, useIntl } from "react-intl";
 import { withUniwind } from "uniwind";
 
 import type { RecipeIngredientsDto } from "@norish/shared/contracts";
@@ -16,11 +16,6 @@ const StyledEntypo = withUniwind(Entypo);
 // ---------------------------------------------------------------------------
 // Servings control (matches web ServingsControl pattern)
 // ---------------------------------------------------------------------------
-
-function formatServings(n: number): string {
-  if (Number.isInteger(n)) return String(n);
-  return n.toFixed(2).replace(/\.?0+$/, "");
-}
 
 type ServingsControlProps = {
   servings: number;
@@ -52,7 +47,7 @@ function ServingsControl({ servings, onServingsChange }: ServingsControlProps) {
         <StyledEntypo name="minus" size={14} className="text-foreground" />
       </Button>
       <Text style={[styles.servingsValue, { color: foregroundColor }]}>
-        {formatServings(servings)}
+        <FormattedNumber value={servings} maximumFractionDigits={2} />
       </Text>
       <Button
         variant="secondary"

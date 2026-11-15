@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Fjernet fra husstanden",
+    "removedDescription": "Du har blitt fjernet fra husstanden av en administrator.",
     "info": {
       "yourRole": "Din rolle",
       "admin": "Administrator",

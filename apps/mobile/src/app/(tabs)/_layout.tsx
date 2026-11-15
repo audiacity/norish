@@ -9,6 +9,7 @@ import { useStoresContext } from "@/context/stores-context";
 import { useSegments } from "expo-router";
 import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { useThemeColor } from "heroui-native";
+import { useIntl } from "react-intl";
 
 // TODO: This file needs cleanup.
 
@@ -40,6 +41,7 @@ function useActiveTab(): { tab: ActiveTab; isRecipeDetail: boolean } {
 // ---------------------------------------------------------------------------
 
 export default function TabsLayout() {
+  const intl = useIntl();
   const [isAddRecipeOpen, setIsAddRecipeOpen] = useState(false);
   const [isAddGroceryOpen, setIsAddGroceryOpen] = useState(false);
   const [tintColor, backgroundColor] = useThemeColor(["accent", "background"] as const);
@@ -102,7 +104,7 @@ export default function TabsLayout() {
         {/* Recipes tab */}
         <NativeTabs.Trigger name="dashboard">
           <NativeTabs.Trigger.Icon sf={{ default: "book", selected: "book.fill" }} md="menu_book" />
-          <NativeTabs.Trigger.Label>Recipes</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Label>{intl.formatMessage({ id: "navbar.nav.home" })}</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
 
         {/* Groceries tab */}
@@ -111,7 +113,7 @@ export default function TabsLayout() {
             sf={{ default: "cart", selected: "cart.fill" }}
             md="shopping_cart"
           />
-          <NativeTabs.Trigger.Label>Groceries</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Label>{intl.formatMessage({ id: "navbar.nav.groceries" })}</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
 
         {/* Calendar tab */}
@@ -120,7 +122,7 @@ export default function TabsLayout() {
             sf={{ default: "calendar", selected: "calendar.circle.fill" }}
             md="calendar_month"
           />
-          <NativeTabs.Trigger.Label>Calendar</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Label>{intl.formatMessage({ id: "navbar.nav.calendar" })}</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
 
         {/* Profile tab */}
@@ -129,13 +131,13 @@ export default function TabsLayout() {
             sf={{ default: "person.crop.circle", selected: "person.crop.circle.fill" }}
             md="person"
           />
-          <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Label>{intl.formatMessage({ id: "settings.user.profile.title" })}</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
 
         {/* Search tab — system search role on iOS, plain icon on Android */}
         <NativeTabs.Trigger name="search" role={Platform.OS === "ios" ? "search" : undefined}>
           <NativeTabs.Trigger.Icon sf="magnifyingglass" md="search" />
-          <NativeTabs.Trigger.Label>Search</NativeTabs.Trigger.Label>
+          <NativeTabs.Trigger.Label>{intl.formatMessage({ id: "common.actions.search" })}</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
       </NativeTabs>
 

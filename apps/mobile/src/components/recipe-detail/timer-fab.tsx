@@ -15,6 +15,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { GlassView } from "expo-glass-effect";
 import * as Haptics from "expo-haptics";
 import { useThemeColor } from "heroui-native";
+import { useIntl } from "react-intl";
 
 import { formatTimerMs } from "@norish/shared/lib/helpers";
 
@@ -49,6 +50,7 @@ function TimerTicker() {
 // ─── Timer Row ───────────────────────────────────────────────────────────────
 
 function TimerRow({ timer, isLast }: { timer: Timer; isLast: boolean }) {
+  const intl = useIntl();
   const pauseTimer = useTimerStore((s) => s.pauseTimer);
   const startTimer = useTimerStore((s) => s.startTimer);
   const removeTimer = useTimerStore((s) => s.removeTimer);
@@ -140,7 +142,9 @@ function TimerRow({ timer, isLast }: { timer: Timer; isLast: boolean }) {
             onPress={handleRemove}
             style={[styles.doneButton, { backgroundColor: `${dangerColor}20` }]}
           >
-            <Text style={[styles.doneButtonText, { color: dangerColor }]}>Done</Text>
+            <Text style={[styles.doneButtonText, { color: dangerColor }]}>
+              {intl.formatMessage({ id: "common.timer.done" })}
+            </Text>
           </Pressable>
         ) : (
           <View style={styles.actionRow}>

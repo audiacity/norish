@@ -13,6 +13,7 @@ import {
 } from "@/lib/groceries/grocery-utils";
 import { Stack } from "expo-router";
 import { useThemeColor } from "heroui-native";
+import { useIntl } from "react-intl";
 
 import type { GroceryDto } from "@norish/shared/contracts";
 
@@ -42,6 +43,7 @@ export function GroceriesScreen() {
     updateGrocery,
     updateRecurringGrocery,
   } = useGroceriesContext();
+  const intl = useIntl();
   const [viewMode, setViewMode] = useState<GroceryViewMode>("store");
   const [frozenIds, setFrozenIds] = useState<ReadonlySet<string>>(new Set());
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
@@ -58,14 +60,16 @@ export function GroceriesScreen() {
             recipeMap,
             scheme,
             frozenIds,
+            unsortedTitle: intl.formatMessage({ id: "groceries.store.unsorted" }),
           })
         : buildRecipeSections({
             groceries,
             stores,
             recipeMap,
             frozenIds,
+            noRecipeTitle: intl.formatMessage({ id: "groceries.empty.manual" }),
           }),
-    [groceries, stores, recipeMap, scheme, viewMode, frozenIds]
+    [groceries, stores, recipeMap, scheme, viewMode, frozenIds, intl]
   );
 
   const isLoading = groceriesLoading || storesLoading;
@@ -180,7 +184,7 @@ export function GroceriesScreen() {
     <>
       <Stack.Screen
         options={{
-          title: "Groceries",
+          title: intl.formatMessage({ id: "navbar.nav.groceries" }),
           headerRight: () => <GroceriesMenu viewMode={viewMode} onViewModeChange={setViewMode} />,
         }}
       />
@@ -194,15 +198,13 @@ export function GroceriesScreen() {
         <View style={{ gap: 14 }}>
           {isLoading ? (
             <GroceriesStateMessage
-              title="Loading groceries"
-              body="Getting the latest household list."
+              title={intl.formatMessage({ id: "common.status.loading" })}
               foregroundColor={foregroundColor}
               mutedColor={mutedColor}
             />
           ) : sections.length === 0 ? (
             <GroceriesStateMessage
-              title="No groceries yet"
-              body="Use the add button to start a household grocery list."
+              title={intl.formatMessage({ id: "groceries.empty.title" })}
               foregroundColor={foregroundColor}
               mutedColor={mutedColor}
             />
@@ -260,7 +262,7 @@ function GroceriesStateMessage({
   mutedColor,
 }: {
   title: string;
-  body: string;
+  body?: string;
   foregroundColor: string;
   mutedColor: string;
 }) {
@@ -271,9 +273,11 @@ function GroceriesStateMessage({
       >
         {title}
       </Text>
-      <Text style={{ color: mutedColor, fontSize: 14, lineHeight: 20, textAlign: "center" }}>
-        {body}
-      </Text>
+      {body ? (
+        <Text style={{ color: mutedColor, fontSize: 14, lineHeight: 20, textAlign: "center" }}>
+          {body}
+        </Text>
+      ) : null}
     </View>
   );
 }

@@ -29,6 +29,7 @@ describe("buildStoreSections", () => {
     stores: [store("sky", "sky", 1), store("primary", "primary", 0)],
     recipeMap: {},
     scheme: "light",
+    unsortedTitle: "Unsorted",
   });
 
   it("tints Unsorted grey, which no Store's colour is confused with", () => {

@@ -38,6 +38,7 @@
     "keepsCurrent": "Jätä tyhjäksi, niin tallennettu arvo säilyy."
   },
   "status": {
+    "comingSoon": "Tulossa pian",
     "loading": "Ladataan...",
     "saving": "Tallennetaan...",
     "deleting": "Poistetaan...",

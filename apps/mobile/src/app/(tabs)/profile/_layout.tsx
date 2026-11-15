@@ -1,8 +1,11 @@
 import React from "react";
 import { Platform } from "react-native";
 import { Stack } from "expo-router";
+import { useIntl } from "react-intl";
 
 export default function ProfileLayout() {
+  const intl = useIntl();
+
   return (
     <Stack
       screenOptions={{
@@ -13,7 +16,10 @@ export default function ProfileLayout() {
         headerLargeTitleShadowVisible: false,
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Profile" }} />
+      <Stack.Screen
+        name="index"
+        options={{ title: intl.formatMessage({ id: "settings.user.profile.title" }) }}
+      />
     </Stack>
   );
 }

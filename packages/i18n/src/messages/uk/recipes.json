@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} інгредієнтів вдома"
   },
   "detail": {
+    "rating": "Оцінка",
     "viewOriginal": "Переглянути оригінальний рецепт",
     "ingredients": "Інгредієнти",
     "ingredientOptions": "Параметри інгредієнта",

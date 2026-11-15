@@ -1,8 +1,11 @@
 import React from "react";
 import { Platform } from "react-native";
 import { Stack } from "expo-router";
+import { useIntl } from "react-intl";
 
 export default function CalendarLayout() {
+  const intl = useIntl();
+
   return (
     <Stack
       screenOptions={{
@@ -13,7 +16,10 @@ export default function CalendarLayout() {
         headerLargeTitleShadowVisible: false,
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Calendar" }} />
+      <Stack.Screen
+        name="index"
+        options={{ title: intl.formatMessage({ id: "navbar.nav.calendar" }) }}
+      />
     </Stack>
   );
 }

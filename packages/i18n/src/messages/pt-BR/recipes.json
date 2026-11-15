@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} dos ingredientes em casa"
   },
   "detail": {
+    "rating": "Avaliação",
     "viewOriginal": "Ver receita original",
     "ingredients": "Ingredientes",
     "ingredientOptions": "Opções de ingredientes",

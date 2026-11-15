@@ -1,8 +1,11 @@
 import React from "react";
 import { Platform } from "react-native";
 import { Stack } from "expo-router";
+import { useIntl } from "react-intl";
 
 export default function GroceriesLayout() {
+  const intl = useIntl();
+
   return (
     <Stack
       screenOptions={{
@@ -13,7 +16,10 @@ export default function GroceriesLayout() {
         headerLargeTitleShadowVisible: false,
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Groceries" }} />
+      <Stack.Screen
+        name="index"
+        options={{ title: intl.formatMessage({ id: "navbar.nav.groceries" }) }}
+      />
     </Stack>
   );
 }

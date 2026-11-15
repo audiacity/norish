@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Card, Skeleton, SkeletonGroup, useThemeColor } from "heroui-native";
+import { useIntl } from "react-intl";
 
 type RecipeCardSkeletonProps = {
   compact?: boolean;
@@ -65,6 +66,7 @@ export function RecipeCardSkeleton({ compact = false }: RecipeCardSkeletonProps)
  * on the backend (pending state).
  */
 export function ImportingRecipePlaceholder({ compact = false }: RecipeCardSkeletonProps) {
+  const intl = useIntl();
   const [foregroundColor, mutedColor] = useThemeColor(["foreground", "muted"] as const);
 
   return (
@@ -78,9 +80,11 @@ export function ImportingRecipePlaceholder({ compact = false }: RecipeCardSkelet
 
         {/* Info overlay */}
         <Card.Body style={styles.importingBody}>
-          <Text style={[styles.importingTitle, { color: foregroundColor }]}>Importing recipe…</Text>
+          <Text style={[styles.importingTitle, { color: foregroundColor }]}>
+            {intl.formatMessage({ id: "common.import.paste.importing" })}
+          </Text>
           <Text style={[styles.importingDescription, { color: mutedColor }]}>
-            It will appear here as soon as it is ready.
+            {intl.formatMessage({ id: "common.import.paste.inProgress" })}
           </Text>
         </Card.Body>
       </SkeletonGroup>

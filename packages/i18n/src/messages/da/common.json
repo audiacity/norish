@@ -38,6 +38,7 @@
     "keepsCurrent": "Lad feltet stå tomt for at beholde den gemte værdi."
   },
   "status": {
+    "comingSoon": "Kommer snart",
     "loading": "Indlæser...",
     "saving": "Gemmer...",
     "deleting": "Sletter...",

@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Rimosso dal nucleo familiare",
+    "removedDescription": "Un amministratore ti ha rimosso dal nucleo familiare.",
     "info": {
       "yourRole": "Il tuo ruolo",
       "admin": "Amministratore",

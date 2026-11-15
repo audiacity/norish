@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "가구에서 제거됨",
+    "removedDescription": "관리자가 회원님을 가구에서 제거했습니다.",
     "info": {
       "yourRole": "내 역할",
       "admin": "관리자",

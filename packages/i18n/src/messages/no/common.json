@@ -38,6 +38,7 @@
     "keepsCurrent": "La feltet stå tomt for å beholde den lagrede verdien."
   },
   "status": {
+    "comingSoon": "Kommer snart",
     "loading": "Laster...",
     "saving": "Lagrer...",
     "deleting": "Sletter...",

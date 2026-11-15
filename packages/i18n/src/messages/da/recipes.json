@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} af ingredienserne er hjemme"
   },
   "detail": {
+    "rating": "Bedømmelse",
     "viewOriginal": "Se original opskrift",
     "ingredients": "Ingredienser",
     "ingredientOptions": "Ingrediensindstillinger",

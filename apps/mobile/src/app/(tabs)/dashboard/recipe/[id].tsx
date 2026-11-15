@@ -5,6 +5,7 @@ import { RecipeActionsMenu } from "@/components/recipe-detail/recipe-actions-men
 import { RecipeDetailSkeleton } from "@/components/recipe-detail/recipe-detail-skeleton";
 import { RecipeDetailView } from "@/components/recipe-detail/recipe-detail-view";
 import { RecipeDetailProvider, useRecipeContext } from "@/context/recipe-detail-context";
+import { useAutoConversion } from "@/hooks/recipes/use-auto-conversion";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { useThemeColor } from "heroui-native";
 import { useIntl } from "react-intl";
@@ -35,6 +36,7 @@ export default function RecipeDetailScreen() {
 
 function RecipeDetailContent({ recipeId }: { recipeId: string }) {
   const ctx = useRecipeContext();
+  useAutoConversion();
 
   if (!ctx || ctx.isLoading) {
     return <RecipeDetailSkeleton />;

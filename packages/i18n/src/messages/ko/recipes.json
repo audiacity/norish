@@ -54,6 +54,7 @@
     "pantryCoverage": "재료의 {percent}가 집에 있음"
   },
   "detail": {
+    "rating": "평점",
     "viewOriginal": "원본 레시피 보기",
     "ingredients": "재료",
     "ingredientOptions": "재료 옵션",

@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} من المكوّنات متوفرة في المنزل"
   },
   "detail": {
+    "rating": "التقييم",
     "viewOriginal": "عرض الوصفة الأصلية",
     "ingredients": "المكوّنات",
     "ingredientOptions": "خيارات المكوّن",

@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Retiré du foyer",
+    "removedDescription": "Un administrateur vous a retiré du foyer.",
     "info": {
       "yourRole": "Votre rôle",
       "admin": "Admin",

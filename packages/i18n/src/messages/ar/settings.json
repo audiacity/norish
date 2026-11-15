@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "تمت إزالتك من المنزل",
+    "removedDescription": "أزالك أحد المسؤولين من المنزل.",
     "info": {
       "yourRole": "دورك",
       "admin": "مسؤول",

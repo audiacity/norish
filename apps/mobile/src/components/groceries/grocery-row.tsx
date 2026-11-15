@@ -5,6 +5,7 @@ import { formatAmountUnit } from "@/lib/groceries/grocery-utils";
 import Animated, { LinearTransition } from "react-native-reanimated";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useThemeColor } from "heroui-native";
+import { useIntl } from "react-intl";
 
 type GroceryRowProps = {
   item: GroceryDto;
@@ -25,6 +26,7 @@ export const GroceryRow = React.memo(function GroceryRow({
   onToggle,
   onPress,
 }: GroceryRowProps) {
+  const intl = useIntl();
   const [foregroundColor, mutedColor, separatorColor, backgroundColor] = useThemeColor([
     "foreground",
     "muted",
@@ -125,7 +127,7 @@ export const GroceryRow = React.memo(function GroceryRow({
                 >
                   <Ionicons name="repeat-outline" size={11} color={tintColor} />
                   <Text style={{ color: tintColor, fontSize: 11, fontWeight: "700" }}>
-                    Recurring
+                    {intl.formatMessage({ id: "groceries.panel.recurrenceEnabled" })}
                   </Text>
                 </View>
               ) : null}

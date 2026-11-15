@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Poistettu kotitaloudesta",
+    "removedDescription": "Ylläpitäjä poisti sinut kotitaloudesta.",
     "info": {
       "yourRole": "Roolisi",
       "admin": "Ylläpitäjä",

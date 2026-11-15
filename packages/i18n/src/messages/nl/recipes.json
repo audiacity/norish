@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} van de ingrediënten in huis"
   },
   "detail": {
+    "rating": "Beoordeling",
     "viewOriginal": "Bekijk origineel recept",
     "ingredients": "Ingrediënten",
     "ingredientOptions": "Ingrediëntopties",

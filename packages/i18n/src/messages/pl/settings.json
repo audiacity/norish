@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Usunięto z gospodarstwa domowego",
+    "removedDescription": "Administrator usunął Cię z gospodarstwa domowego.",
     "info": {
       "yourRole": "Twoja rola",
       "admin": "Administrator",

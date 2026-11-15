@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Button, Separator, useThemeColor } from "heroui-native";
-import { useIntl } from "react-intl";
+import { FormattedNumber, useIntl } from "react-intl";
 import { withUniwind } from "uniwind";
 
 const StyledEntypo = withUniwind(Entypo);
@@ -51,11 +51,6 @@ const MACROS = [
 // Portion control (matches web nutrition-portion-control.tsx)
 // ---------------------------------------------------------------------------
 
-function formatPortions(n: number): string {
-  if (Number.isInteger(n)) return String(n);
-  return n.toFixed(2).replace(/\.?0+$/, "");
-}
-
 type PortionControlProps = {
   portions: number;
   onChange: (portions: number) => void;
@@ -94,7 +89,7 @@ function PortionControl({ portions, onChange }: PortionControlProps) {
         <StyledEntypo name="minus" size={14} className="text-foreground" />
       </Button>
       <Text style={[styles.portionValue, { color: foregroundColor }]}>
-        {formatPortions(portions)}
+        <FormattedNumber value={portions} maximumFractionDigits={2} />
       </Text>
       <Button
         variant="secondary"

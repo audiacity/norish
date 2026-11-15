@@ -8,6 +8,7 @@ import * as Haptics from "expo-haptics";
 
 import { GroceryRow } from "./grocery-row";
 import { SwipeableGroceryRow } from "./swipeable-grocery-row";
+import { useIntl } from "react-intl";
 
 /**
  * Estimated row height used as the initial guess before dynamic measurement.
@@ -56,6 +57,7 @@ export function SortableGroceryList({
   onDeleteItem,
   onReorder,
 }: SortableGroceryListProps) {
+  const intl = useIntl();
   // Track the measured total height so the wrapper can size itself correctly.
   const [measuredHeight, setMeasuredHeight] = useState(
     () => sortableItems.length * ESTIMATED_ITEM_HEIGHT
@@ -69,9 +71,9 @@ export function SortableGroceryList({
   const getContextLabel = useCallback(
     (item: GroceryDto) => {
       if (contextMode === "store") return groceryRecipeName(item, recipeMap);
-      return item.storeId ? storeNameById.get(item.storeId) ?? null : "Unsorted";
+      return item.storeId ? storeNameById.get(item.storeId) ?? null : intl.formatMessage({ id: "groceries.store.unsorted" });
     },
-    [contextMode, recipeMap, storeNameById]
+    [contextMode, recipeMap, storeNameById, intl]
   );
 
   const handleHeightsMeasured = useCallback((heights: { [id: string]: number }) => {

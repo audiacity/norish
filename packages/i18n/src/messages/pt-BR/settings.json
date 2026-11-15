@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Removido da casa",
+    "removedDescription": "Você foi removido da casa por um admin.",
     "info": {
       "yourRole": "Seu papel",
       "admin": "Admin",

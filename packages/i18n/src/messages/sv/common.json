@@ -38,6 +38,7 @@
     "keepsCurrent": "Lämna tomt för att behålla det sparade värdet."
   },
   "status": {
+    "comingSoon": "Kommer snart",
     "loading": "Läser in...",
     "saving": "Sparar...",
     "deleting": "Tar bort...",

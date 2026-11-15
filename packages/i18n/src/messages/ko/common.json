@@ -38,6 +38,7 @@
     "keepsCurrent": "저장된 값을 유지하려면 비워 두세요."
   },
   "status": {
+    "comingSoon": "곧 제공 예정",
     "loading": "불러오는 중...",
     "saving": "저장 중...",
     "deleting": "삭제 중...",

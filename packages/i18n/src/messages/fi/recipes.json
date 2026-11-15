@@ -54,6 +54,7 @@
     "pantryCoverage": "{percent} aineksista kotona"
   },
   "detail": {
+    "rating": "Arvosana",
     "viewOriginal": "Näytä alkuperäinen resepti",
     "ingredients": "Ainesosat",
     "ingredientOptions": "Ainesosan asetukset",

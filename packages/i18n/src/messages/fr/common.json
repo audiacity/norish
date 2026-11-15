@@ -38,6 +38,7 @@
     "keepsCurrent": "Laissez le champ vide pour conserver la valeur enregistrée."
   },
   "status": {
+    "comingSoon": "Bientôt disponible",
     "loading": "Chargement...",
     "saving": "Sauvegarde...",
     "deleting": "Suppression...",

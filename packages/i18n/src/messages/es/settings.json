@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Eliminado del hogar",
+    "removedDescription": "Un administrador te ha eliminado del hogar.",
     "info": {
       "yourRole": "Tu rol",
       "admin": "Administrador",

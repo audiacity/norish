@@ -38,6 +38,7 @@
     "keepsCurrent": "Lassen Sie das Feld leer, um den gespeicherten Wert zu behalten."
   },
   "status": {
+    "comingSoon": "Demnächst verfügbar",
     "loading": "Wird geladen...",
     "saving": "Wird gespeichert...",
     "deleting": "Wird gelöscht...",

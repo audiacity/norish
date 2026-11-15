@@ -38,6 +38,7 @@
     "keepsCurrent": "Laat leeg om de opgeslagen waarde te behouden."
   },
   "status": {
+    "comingSoon": "Binnenkort beschikbaar",
     "loading": "Laden...",
     "saving": "Opslaan...",
     "deleting": "Verwijder...",

@@ -44,7 +44,12 @@ export function RecipeQuickActions({ onCook }: { onCook?: () => void }) {
         variant="secondary"
         feedbackVariant="scale"
         className="bg-surface-tertiary h-12 flex-row items-center gap-1 rounded-[14px] px-4"
-        onPress={() => Alert.alert("Plan", "Meal planning coming soon!")}
+        onPress={() =>
+          Alert.alert(
+            intl.formatMessage({ id: "recipes.actions.plan" }),
+            intl.formatMessage({ id: "common.status.comingSoon" })
+          )
+        }
       >
         <StyledEntypo name="plus" size={16} className="text-accent" />
         <Text style={[styles.pillLabel, { color: foregroundColor }]}>
@@ -58,7 +63,12 @@ export function RecipeQuickActions({ onCook }: { onCook?: () => void }) {
         feedbackVariant="scale"
         className="bg-surface-tertiary size-12 items-center justify-center rounded-[14px]"
         isIconOnly
-        onPress={() => Alert.alert("Groceries", "Ingredients added to your grocery list.")}
+        onPress={() =>
+          Alert.alert(
+            intl.formatMessage({ id: "navbar.nav.groceries" }),
+            intl.formatMessage({ id: "groceries.panel.ingredientsAdded" })
+          )
+        }
       >
         <Ionicons name="cart-outline" size={18} color={foregroundColor} />
       </Button>

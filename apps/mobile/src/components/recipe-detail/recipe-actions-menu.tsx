@@ -112,7 +112,7 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
           },
         },
         {
-          text: "Cancel",
+          text: intl.formatMessage({ id: "common.actions.cancel" }),
           style: "cancel",
         },
       ]
@@ -167,12 +167,22 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
       <UIButton
         label={intl.formatMessage({ id: "recipes.actions.addToCalendar" })}
         systemImage="calendar.badge.plus"
-        onPress={() => Alert.alert("Calendar", "Meal planning coming soon!")}
+        onPress={() =>
+          Alert.alert(
+            intl.formatMessage({ id: "navbar.nav.calendar" }),
+            intl.formatMessage({ id: "common.status.comingSoon" })
+          )
+        }
       />
       <UIButton
         label={intl.formatMessage({ id: "recipes.detail.addToGroceries" })}
         systemImage="cart.badge.plus"
-        onPress={() => Alert.alert("Groceries", "Add to groceries coming soon!")}
+        onPress={() =>
+          Alert.alert(
+            intl.formatMessage({ id: "navbar.nav.groceries" }),
+            intl.formatMessage({ id: "common.status.comingSoon" })
+          )
+        }
       />
       <UIButton
         label={
@@ -198,7 +208,12 @@ export function RecipeActionsMenu({ ctx }: RecipeActionsMenuProps) {
         <UIButton
           label={intl.formatMessage({ id: "recipes.actions.edit" })}
           systemImage="pencil"
-          onPress={() => Alert.alert("Edit", "Recipe editing coming soon!")}
+          onPress={() =>
+            Alert.alert(
+              intl.formatMessage({ id: "recipes.actions.edit" }),
+              intl.formatMessage({ id: "common.status.comingSoon" })
+            )
+          }
         />
       ) : null}
       {canConvert ? (

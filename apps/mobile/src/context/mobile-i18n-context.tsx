@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { useAuth } from "@/context/auth-context";
 import { useLocaleConfigQuery } from "@/hooks/config";
 import { buildLocaleDisplayMap, resolveLocaleSelection } from "@/lib/i18n/locale-state";
-import { publishLocale } from "@/lib/i18n/locale-store";
+import { publishIntlMessages, publishLocale } from "@/lib/i18n/locale-store";
 import {
   loadLocalePreference,
   saveLocalePreference,
@@ -197,13 +197,14 @@ function MobileLocaleProviderInner({ children }: { children: React.ReactNode }) 
     publishLocale(activeLocale);
   }, [activeLocale]);
 
+  const flatMessages = useMemo(() => flattenMessages(messages), [messages]);
+  useEffect(() => {
+    publishIntlMessages(activeLocale, flatMessages);
+  }, [activeLocale, flatMessages]);
+
   return (
     <MobileLocaleContext.Provider value={value}>
-      <IntlProvider
-        defaultLocale={DEFAULT_LOCALE}
-        locale={activeLocale}
-        messages={flattenMessages(messages)}
-      >
+      <IntlProvider defaultLocale={DEFAULT_LOCALE} locale={activeLocale} messages={flatMessages}>
         {children}
       </IntlProvider>
     </MobileLocaleContext.Provider>

@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { styles } from "@/styles/recipe-card.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeColor } from "heroui-native";
-import { useIntl } from "react-intl";
+import { FormattedNumber, useIntl } from "react-intl";
 
 function formatDuration(totalDurationMinutes: number) {
   if (totalDurationMinutes < 60) {
@@ -42,16 +42,17 @@ function HighlightItem({
 }
 
 function RatingHighlight({ rating, starColor }: { rating: number; starColor: string }) {
+  const intl = useIntl();
   return (
     <View style={styles.highlightItem}>
       <Text style={styles.highlightLabel} className="text-foreground/70">
-        Rating
+        {intl.formatMessage({ id: "recipes.detail.rating" })}
       </Text>
       <View style={styles.ratingRow}>
         <Text style={[styles.highlightValue, { color: starColor }]}>★</Text>
         <Text style={styles.highlightValue} className="text-foreground">
           {" "}
-          {rating.toFixed(1)}
+          <FormattedNumber value={rating} minimumFractionDigits={1} maximumFractionDigits={1} />
         </Text>
       </View>
     </View>

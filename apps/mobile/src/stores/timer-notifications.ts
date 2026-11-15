@@ -1,3 +1,4 @@
+import { getIntl } from "@/lib/i18n/locale-store";
 import * as Notifications from "expo-notifications";
 
 import { createClientLogger } from "@norish/shared/lib/logger";
@@ -28,7 +29,7 @@ export async function showTimerNotification(timer: {
     await Notifications.scheduleNotificationAsync({
       content: {
         title,
-        body: "Timer complete!",
+        body: getIntl().formatMessage({ id: "common.timer.notification_title" }),
         sound: "default",
         categoryIdentifier: "timer-complete",
       },

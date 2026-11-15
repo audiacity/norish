@@ -38,6 +38,7 @@
     "keepsCurrent": "Lascia vuoto per mantenere il valore salvato."
   },
   "status": {
+    "comingSoon": "Prossimamente",
     "loading": "Caricamento...",
     "saving": "Salvataggio...",
     "deleting": "Eliminazione...",

@@ -11,11 +11,6 @@ export type GrocerySection = {
   items: GroceryDto[];
 };
 
-const UNSORTED_SECTION = {
-  id: "unsorted",
-  title: "Unsorted",
-};
-
 export function formatAmountUnit(amount: number | null, unit: string | null): string {
   if (amount == null && !unit) return "1";
   if (amount == null) return unit ?? "1";
@@ -88,19 +83,22 @@ export function buildStoreSections({
   stores,
   scheme,
   frozenIds = new Set(),
+  unsortedTitle,
 }: {
   groceries: GroceryDto[];
   stores: StoreDto[];
   recipeMap: RecipeMap;
   scheme: ResolvedColorScheme;
   frozenIds?: ReadonlySet<string>;
+  unsortedTitle: string;
 }): GrocerySection[] {
   const sections: GrocerySection[] = [];
   const unsortedItems = groceries.filter((item) => item.storeId == null);
 
   if (unsortedItems.length > 0) {
     sections.push({
-      ...UNSORTED_SECTION,
+      id: "unsorted",
+      title: unsortedTitle,
       tintColor: unsortedTintColor(scheme),
       items: sortByCompletion(unsortedItems, frozenIds),
     });
@@ -125,11 +123,13 @@ export function buildRecipeSections({
   groceries,
   recipeMap,
   frozenIds = new Set(),
+  noRecipeTitle,
 }: {
   groceries: GroceryDto[];
   stores: StoreDto[];
   recipeMap: RecipeMap;
   frozenIds?: ReadonlySet<string>;
+  noRecipeTitle: string;
 }): GrocerySection[] {
   const recipeEntries = Object.values(recipeMap).sort((a, b) =>
     a.recipeName.localeCompare(b.recipeName)
@@ -159,7 +159,7 @@ export function buildRecipeSections({
   if (uncategorizedItems.length > 0) {
     sections.push({
       id: "recipe-free",
-      title: "Just groceries",
+      title: noRecipeTitle,
       tintColor: "#A855F7",
       items: sortByCompletion(uncategorizedItems, frozenIds),
     });

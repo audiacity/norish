@@ -244,6 +244,8 @@
     }
   },
   "household": {
+    "removedTitle": "Borttagen från hushållet",
+    "removedDescription": "Du har tagits bort från hushållet av en administratör.",
     "info": {
       "yourRole": "Din roll",
       "admin": "Administratör",

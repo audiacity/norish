@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ProfileMeasurementPicker } from "@/components/profile-measurement-picker";
 import { useAuth } from "@/context/auth-context";
 import { useRouter } from "expo-router";
 import { Button, Card, useThemeColor } from "heroui-native";
@@ -58,6 +59,8 @@ export default function ProfileScreen() {
               {user?.email ?? intl.formatMessage({ id: "auth.errors.user_not_found.title" })}
             </Text>
           </View>
+
+          <ProfileMeasurementPicker />
 
           <Button
             variant="secondary"

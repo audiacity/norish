@@ -11,6 +11,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import { getStoredAuthCookie } from "@/lib/auth-client";
 import { NoImagePlaceholder } from "@/components/shared/no-image-placeholder";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEvent } from "expo";
@@ -311,10 +312,13 @@ function MediaSlide({
     );
   }
 
+  // Media sits behind the session: without the cookie the server answers with the login page.
+  const cookie = getStoredAuthCookie();
+
   return (
     <Pressable onPress={onPress} style={{ width }}>
       <Image
-        source={{ uri: item.uri }}
+        source={{ uri: item.uri, headers: cookie ? { Cookie: cookie } : undefined }}
         contentFit="cover"
         transition={400}
         style={StyleSheet.absoluteFill}
@@ -336,7 +340,9 @@ function VideoSlide({
   onDoubleTap: () => void;
 }) {
   const videoRef = useRef<VideoView>(null);
-  const player = useVideoPlayer(item.uri, (p) => {
+  // Media sits behind the session: without the cookie the server answers with the login page.
+  const cookie = getStoredAuthCookie();
+  const player = useVideoPlayer({ uri: item.uri, headers: cookie ? { Cookie: cookie } : undefined }, (p) => {
     p.loop = true;
     p.muted = true;
     p.play();

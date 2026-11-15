@@ -123,6 +123,11 @@ const trpcBundle = createTRPCProviderBundle<AppRouter>({
     void invalidateSession("websocket-unauthorized");
   },
   onUnauthorized: () => {
+    // Anonymous queries (login screen, pre-login client) legitimately 401; only a signed-in session can be invalid.
+    if (!getAuthTransportSnapshot().hasActiveSession) {
+      return;
+    }
+
     log.info("tRPC request returned unauthorized response, signing out");
     void invalidateSession("transport-unauthorized");
   },

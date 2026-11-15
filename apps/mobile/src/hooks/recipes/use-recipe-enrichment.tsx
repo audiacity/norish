@@ -6,7 +6,8 @@ import { useIntl } from "react-intl";
 
 import type { RecipeEnrichmentKind } from "@norish/shared/lib/recipe-enrichment";
 
-const sharedUseRecipeEnrichment = sharedRecipeFamilyHooks.useRecipeEnrichment;
+// Must start with "use": React Compiler only treats use* callees as hooks, and would otherwise memoize the call and skip its hooks on re-render.
+const useSharedRecipeEnrichment = sharedRecipeFamilyHooks.useRecipeEnrichment;
 
 /** Recipe Enrichment lifecycle and manual requests for every kind. */
 export function useRecipeEnrichment(recipeId: string) {
@@ -35,5 +36,5 @@ export function useRecipeEnrichment(recipeId: string) {
     [intl, toast]
   );
 
-  return sharedUseRecipeEnrichment(recipeId, user?.id ?? null, { onManualError });
+  return useSharedRecipeEnrichment(recipeId, user?.id ?? null, { onManualError });
 }

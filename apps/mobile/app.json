@@ -28,6 +28,7 @@
       "expo-router",
       "./plugins/no-push-entitlement",
       "./plugins/pod-deployment-target",
+      "./plugins/scene-lifecycle",
       [
         "expo-splash-screen",
         {

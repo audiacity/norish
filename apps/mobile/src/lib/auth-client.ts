@@ -1,5 +1,5 @@
 import { AUTH_STORAGE_PREFIX, clearAuthStorage } from "@/lib/auth-storage";
-import { expoClient } from "@better-auth/expo/client";
+import { expoClient, getCookie, storageAdapter } from "@better-auth/expo/client";
 import { createAuthClient } from "better-auth/react";
 import * as SecureStore from "expo-secure-store";
 
@@ -30,4 +30,9 @@ export async function resetAuthClientStorage(): Promise<void> {
   await clearAuthStorage();
   _client = null;
   _currentBaseUrl = null;
+}
+
+// better-auth's client.getCookie() is async (>=1.7); request headers and WebSocket construction need it synchronously.
+export function getStoredAuthCookie(): string {
+  return getCookie(storageAdapter(SecureStore).getItem(`${AUTH_STORAGE_PREFIX}_cookie`));
 }

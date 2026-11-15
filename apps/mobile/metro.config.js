@@ -23,12 +23,16 @@ config.resolver = {
   ...resolver,
   assetExts: (resolver.assetExts ?? []).filter((ext) => ext !== "svg"),
   sourceExts: [...(resolver.sourceExts ?? []), "svg"],
-  resolveRequest: (context, name, platform) =>
-    context.resolveRequest(
+  resolveRequest: (context, name, platform) => {
+    // Dev lazy chunks (dynamic import() of workspace packages, e.g. i18n JSON) are requested relative to the
+    // monorepo root but resolved from apps/mobile; map them back to the real file.
+    if (name.startsWith("./packages/")) name = path.join(root, name);
+    return context.resolveRequest(
       SINGLETONS.test(name) ? { ...context, originModulePath: origin } : context,
       name,
       platform,
-    ),
+    );
+  },
 };
 
 module.exports = withUniwindConfig(wrapWithReanimatedMetroConfig(config), {

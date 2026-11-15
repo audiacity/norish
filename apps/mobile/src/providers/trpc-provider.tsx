@@ -1,7 +1,7 @@
 import type { OutboxMutationClient } from "@/lib/outbox";
 import React, { useEffect, useMemo, useSyncExternalStore } from "react";
 import { notifyBackendConnect, notifyBackendDisconnect } from "@/context/network-context";
-import { getAuthClient } from "@/lib/auth-client";
+import { getStoredAuthCookie } from "@/lib/auth-client";
 import {
   getAuthTransportSnapshot,
   invalidateSession,
@@ -32,10 +32,6 @@ export async function closeMobileTrpcConnections(): Promise<void> {
 
   await Promise.all(clients.map(async (client) => client.close().catch(() => null)));
 }
-
-type CookieCapableAuthClient = ReturnType<typeof getAuthClient> & {
-  getCookie?: () => string | undefined;
-};
 
 type HeaderCapableWebSocket = typeof WebSocket & {
   new (
@@ -92,8 +88,7 @@ function trpcBundleGetHeaders(): Record<string, string> {
     return {};
   }
 
-  const client = getAuthClient(currentBaseUrl) as CookieCapableAuthClient;
-  const cookies = client.getCookie?.();
+  const cookies = getStoredAuthCookie();
 
   if (!cookies) {
     return {};

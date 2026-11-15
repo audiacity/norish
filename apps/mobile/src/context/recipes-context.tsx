@@ -1,3 +1,4 @@
+import { getStoredAuthCookie } from "@/lib/auth-client";
 import React, { createContext, useContext, useMemo } from "react";
 import { View } from "react-native";
 import { useAuth } from "@/context/auth-context";
@@ -117,9 +118,9 @@ export function RecipesProvider({ children }: { children: React.ReactNode }) {
 
 function MobileRecipesContextAdapter({ children }: { children: React.ReactNode }) {
   const base = sharedRecipesContext.useRecipesContext();
-  const { backendBaseUrl, authClient } = useAuth();
+  const { backendBaseUrl } = useAuth();
   const favoriteSet = useMemo(() => new Set(base.favoriteIds), [base.favoriteIds]);
-  const authCookie = ((authClient as any)?.getCookie?.() as string | undefined) ?? null;
+  const authCookie = getStoredAuthCookie() || null;
 
   const recipeCards = useMemo(
     () =>

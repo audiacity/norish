@@ -13,6 +13,7 @@ import {
   setReplayFn,
   startOutboxProcessor,
 } from "@/lib/outbox";
+import { notifyDisconnectUnlessNormalClose } from "@/lib/ws-reachability";
 import { createPersistedQueryClient } from "@/lib/query-cache/create-persisted-query-client";
 
 import type { AppRouter } from "@norish/trpc/client";
@@ -115,7 +116,7 @@ const trpcBundle = createTRPCProviderBundle<AppRouter>({
     mobileWebSocketClients.clear();
     mobileWebSocketClients.add(client);
   },
-  onWebSocketClose: notifyBackendDisconnect,
+  onWebSocketClose: (cause) => notifyDisconnectUnlessNormalClose(cause, notifyBackendDisconnect),
   onWebSocketOpen: notifyBackendConnect,
   onWebSocketUnauthorized: () => {
     log.info("WebSocket rejected with unauthorized response, signing out");

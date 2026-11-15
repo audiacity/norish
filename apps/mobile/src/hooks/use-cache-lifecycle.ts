@@ -72,10 +72,3 @@ export function clearAllQueryCaches() {
   persistedQueryClient.clear();
   queryCacheStorage.clearAll();
 }
-
-/**
- * Clears both the in-memory QueryClient cache and the persisted MMKV cache.
- * Call this when the backend base URL changes so cached data from one
- * environment does not leak into another.
- */
-export const clearQueryCachesOnUrlChange = clearAllQueryCaches;

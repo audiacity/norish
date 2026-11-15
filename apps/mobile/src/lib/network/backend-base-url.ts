@@ -1,4 +1,3 @@
-import { clearQueryCachesOnUrlChange } from "@/hooks/use-cache-lifecycle";
 import { resetAuthClientStorage } from "@/lib/auth-client";
 import * as SecureStore from "expo-secure-store";
 
@@ -75,7 +74,10 @@ export async function loadBackendBaseUrl(): Promise<string | null> {
   return normalized;
 }
 
-export async function saveBackendBaseUrl(input: string): Promise<string> {
+export async function saveBackendBaseUrl(
+  input: string,
+  options?: { onUrlChange?: () => void }
+): Promise<string> {
   const normalized = normalizeBackendBaseUrl(input);
 
   if (!normalized) {
@@ -85,7 +87,7 @@ export async function saveBackendBaseUrl(input: string): Promise<string> {
   const existing = await loadBackendBaseUrl();
 
   if (existing !== normalized) {
-    clearQueryCachesOnUrlChange();
+    options?.onUrlChange?.();
     await resetAuthClientStorage();
   }
 

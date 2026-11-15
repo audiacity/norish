@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { AuthShell } from "@/components/shell/auth-shell";
 import { useBackendUrl } from "@/hooks/use-backend-url";
+import { clearAllQueryCaches } from "@/hooks/use-cache-lifecycle";
 import {
   getBackendHealthUrl,
   normalizeBackendBaseUrl,
@@ -50,7 +51,7 @@ export default function ConnectScreen() {
         throw new Error(`Server returned ${response.status}`);
       }
 
-      await saveBackendBaseUrl(normalizedBaseUrl);
+      await saveBackendBaseUrl(normalizedBaseUrl, { onUrlChange: clearAllQueryCaches });
       router.replace("/login");
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
